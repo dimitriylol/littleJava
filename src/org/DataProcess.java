@@ -19,7 +19,7 @@ public class DataProcess {
 
     public int process(int number) {
         int result = countFactorial(number);
-        resultMessage(result);
+        resultMessage(number, result);
         return result;
     }
 }

@@ -10,7 +10,7 @@ public class ViewResult {
             System.out.print(str + " ");
         System.out.println("is incorrect!");
     }
-    public static void resultMessage(int factorial) {
-        System.out.println("Factorial is " + factorial);
+    public static void resultMessage(int inputNumber, int factorial) {
+        System.out.println("!" + inputNumber + " = " + factorial);
     }
 }
