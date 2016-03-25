@@ -10,4 +10,9 @@ public class ChewingGum extends Candy {
         super(candyInit.name, candyInit.sugarPercent, candyInit.weight);
         this.color = candyInit.additional;
     }
+
+    public ChewingGum(String name, int sugarPercent, int weight, String color) {
+        super(name, sugarPercent, weight);
+        this.color = color;
+    }
 }

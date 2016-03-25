@@ -10,7 +10,7 @@ import java.util.Collections;
 public class CandyBox {
     ArrayList<Candy> candies;
 
-    CandyBox(CandyInit[] candyInits) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
+    public CandyBox(ArrayList<CandyInit> candyInits) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
         candies = new ArrayList<>();
         for (CandyInit candyInitValue : candyInits) {
             addCandy(getCandyConstructor(candyInitValue.kind), candyInitValue);

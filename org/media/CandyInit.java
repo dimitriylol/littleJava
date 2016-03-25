@@ -10,7 +10,7 @@ public class CandyInit {
     public final int weight;
     public final String kind;
 
-    CandyInit(String name, int sugarPercent, int weight, String kind, String additional) {
+    public CandyInit(String name, int sugarPercent, int weight, String kind, String additional) {
         this.name = name;
         this.sugarPercent = sugarPercent;
         this.weight = weight;
