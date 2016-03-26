@@ -1,6 +1,5 @@
 package org.controller;
 
-import org.media.Candy;
 import org.media.CandyBox;
 import org.media.CandyInit;
 
@@ -36,9 +35,10 @@ public class InputControl {
 
     private ArrayList<CandyInit> getAllCandyInit(String[] tableNames, String[] candyNames) throws SQLException {
         ArrayList<CandyInit> res = new ArrayList<>();
+
         for (String tableName : tableNames) {
             for (String name : candyNames) {
-                ResultSet rs = safeGetResultSet("select * from " + tableName + " where name = " + name);
+                ResultSet rs = safeGetResultSet("SELECT * FROM " + tableName + " WHERE name = '" + name + "'");
                 while (rs.next()) {
                     res.add(new CandyInit(safeGetSting(rs, "name"), safeGetInt(rs, "sugarPercent"),
                             safeGetInt(rs, "weight"), safeGetSting(rs, "kind"), safeGetSting(rs, "additional")));
@@ -56,6 +56,7 @@ public class InputControl {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     private int safeGetInt(ResultSet rs, String sugarPercent) {
@@ -64,6 +65,7 @@ public class InputControl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
     private String safeGetSting(ResultSet rs, String name) {
@@ -72,5 +74,6 @@ public class InputControl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

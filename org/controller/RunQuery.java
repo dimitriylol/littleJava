@@ -13,13 +13,24 @@ public class RunQuery extends Database {
 
     public RunQuery(String queryStr) throws SQLException, ClassNotFoundException {
         super();
-        //STEP 4: Execute a query
-        System.out.println("Creating statement...");
         statement = connection.createStatement();
         rs = statement.executeQuery(queryStr);
     }
 
-    ResultSet getResult() {
+    public RunQuery() throws SQLException, ClassNotFoundException {
+        super();
+    }
+
+    public ResultSet getTables() {
+        try {
+            return connection.getMetaData().getTables(null, null, "%" , null );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet getResult() {
         return rs;
 //        while (rs.next()) {
 //            //Retrieve by column name

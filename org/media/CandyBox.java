@@ -1,6 +1,7 @@
 package org.media;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,7 +19,8 @@ public class CandyBox {
     }
 
     private Constructor getCandyConstructor(String candyKind) throws ClassNotFoundException, NoSuchMethodException {
-        return Class.forName(candyKind).getConstructor(CandyInit.class);
+        Class<CandyInit> ci = CandyInit.class;
+        return Class.forName("org.media." + candyKind).getConstructor(ci);
     }
 
     private void addCandy(Constructor constr, CandyInit candyInit) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -47,6 +49,15 @@ public class CandyBox {
                 res = candy;
                 break;
             }
+        }
+        return res;
+    }
+
+    @Override
+    public String toString() {
+        String res = "CandyBox consists of :\n";
+        for (Candy candy : candies) {
+            res += "\t* " + candy + "\n";
         }
         return res;
     }
