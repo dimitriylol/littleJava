@@ -1,6 +1,5 @@
 package org.media;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,20 +13,8 @@ public class CandyBox {
     public CandyBox(ArrayList<CandyInit> candyInits) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
         candies = new ArrayList<>();
         for (CandyInit candyInitValue : candyInits) {
-            addCandy(getCandyConstructor(candyInitValue.kind), candyInitValue);
+            candies.add(candyInitValue.getCandy());
         }
-    }
-
-    private Constructor getCandyConstructor(String candyKind) throws ClassNotFoundException, NoSuchMethodException {
-        Class<CandyInit> ci = CandyInit.class;
-        return Class.forName("org.media." + candyKind).getConstructor(ci);
-    }
-
-    private void addCandy(Constructor constr, CandyInit candyInit) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        candies.add((Candy) constr.newInstance(candyInit));
-//        candies.add((Candy) constr.newInstance(candyName, select.getInt("sugarPercent"),
-//                select.getInt("weight"), select.getString("additional")));
-
     }
 
     public int totalWeight() {

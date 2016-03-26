@@ -1,5 +1,6 @@
 package org.controller;
 
+import org.media.Candy;
 import org.media.CandyBox;
 import org.media.CandyInit;
 
@@ -35,17 +36,40 @@ public class InputControl {
 
     private ArrayList<CandyInit> getAllCandyInit(String[] tableNames, String[] candyNames) throws SQLException {
         ArrayList<CandyInit> res = new ArrayList<>();
-
-        for (String tableName : tableNames) {
-            for (String name : candyNames) {
-                ResultSet rs = safeGetResultSet("SELECT * FROM " + tableName + " WHERE name = '" + name + "'");
-                while (rs.next()) {
-                    res.add(new CandyInit(safeGetSting(rs, "name"), safeGetInt(rs, "sugarPercent"),
-                            safeGetInt(rs, "weight"), safeGetSting(rs, "kind"), safeGetSting(rs, "additional")));
-                }
-            }
+        for (String candyName : candyNames) {
+            res.add(getCandyInit(tableNames, candyName));
         }
         return res;
+    }
+
+    public Candy createCandy(String[] tables, String name) {
+        try {
+            return getCandyInit(tables, name).getCandy();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private CandyInit getCandyInit(String[] tableNames, String candyName) throws SQLException {
+        for (String tableName : tableNames) {
+            ResultSet rs = safeGetResultSet("SELECT * FROM " + tableName + " WHERE name = '" + candyName + "'");
+            if (rs.next()) {
+                return new CandyInit(safeGetSting(rs, "name"), safeGetInt(rs, "sugarPercent"),
+                                    safeGetInt(rs, "weight"), safeGetSting(rs, "kind"), safeGetSting(rs, "additional"));
+            }
+        }
+        return null;
     }
 
     private ResultSet safeGetResultSet(String query) {
