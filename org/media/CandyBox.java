@@ -32,7 +32,7 @@ public class CandyBox {
     public Candy findCandyBySugarPercent(int sugarPercentLow, int sugarPercentHigh) {
         Candy res = null;
         for (Candy candy : candies) {
-            if (candy.getSugarPercent() >= sugarPercentLow && candy.getSugarPercent() <= sugarPercentLow) {
+            if (candy.getSugarPercent() >= sugarPercentLow && candy.getSugarPercent() <= sugarPercentHigh) {
                 res = candy;
                 break;
             }
